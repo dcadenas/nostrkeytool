@@ -1,7 +1,23 @@
 # nostrkeytool
 Tool for NOSTR key operations
 
+## Installation
+
+You can install `nostrkeytool` using Cargo, the Rust package manager.
+
+If you have Rust and Cargo installed, run the following command:
+
+```bash
+cargo install nostrkeytool
 ```
+
+This command will download and compile `nostrkeytool`, making it available in your Cargo binary path.
+
+Make sure `$HOME/.cargo/bin` is in your system's PATH to run `nostrkeytool` from anywhere.
+
+## Usage
+
+```plaintext
 Usage: nostrkeytool [OPTIONS]
 
 Options:
