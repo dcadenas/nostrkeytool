@@ -1,5 +1,6 @@
 [package]
 name = "nostrkeytool"
+readme = "README.md"
 version = "0.1.0"
 authors = ["Daniel Cadenas"]
 edition = "2018"
