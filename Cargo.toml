@@ -3,6 +3,11 @@ name = "nostrkeytool"
 version = "0.1.0"
 authors = ["Daniel Cadenas"]
 edition = "2018"
+description = "A command-line tool for NOSTR key operations"
+license = "MIT"  # Assuming you're using the MIT License
+repository = "https://github.com/dcadenas/nostrkeytool"
+keywords = ["nostr", "key", "crypto"]
+categories = ["cryptography", "command-line-utilities"]
 
 [dependencies]
 anyhow = "1.0"
