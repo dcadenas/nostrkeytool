@@ -21,8 +21,10 @@ Make sure `$HOME/.cargo/bin` is in your system's PATH to run `nostrkeytool` from
 Usage: nostrkeytool [OPTIONS]
 
 Options:
-      --sec2npub <sec2npub>        Input: secret, Output: npub
-      --sec2pubkey <sec2pubkey>    Input: secret, Output: pubkey
+      --sec2npub <sec2npub>        Input: hex secret, Output: npub
+      --sec2pubkey <sec2pubkey>    Input: hex secret, Output: pubkey
+      --sec2nsec <sec2nsec>        Input: hex secret, Output: nsec
+      --nsec2sec <nsec2sec>        Input: nsec, Output: hex secret
       --pubkey2npub <pubkey2npub>  Input: pubkey, Output: npub
       --npub2pubkey <npub2pubkey>  Input: npub, Output: pubkey
       --gen                        Generate a secret

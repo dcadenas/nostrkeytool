@@ -22,12 +22,22 @@ async fn main() -> Result<()> {
         .arg(
             Arg::new("sec2npub")
                 .long("sec2npub")
-                .help("Input: secret, Output: npub"),
+                .help("Input: hex secret, Output: npub"),
         )
         .arg(
             Arg::new("sec2pubkey")
                 .long("sec2pubkey")
-                .help("Input: secret, Output: pubkey"),
+                .help("Input: hex secret, Output: pubkey"),
+        )
+        .arg(
+            Arg::new("sec2nsec")
+                .long("sec2nsec")
+                .help("Input: hex secret, Output: nsec"),
+        )
+        .arg(
+            Arg::new("nsec2sec")
+                .long("nsec2sec")
+                .help("Input: nsec, Output: hex secret"),
         )
         .arg(
             Arg::new("pubkey2npub")
@@ -50,6 +60,12 @@ async fn main() -> Result<()> {
     if let Some(secret) = matches.get_one::<String>("sec2npub") {
         let result = process_sec2npub(secret).await?;
         println!("{}", result);
+    } else if let Some(secret) = matches.get_one::<String>("sec2nsec") {
+        let result = process_sec2nsec(secret).await?;
+        println!("{}", result);
+    } else if let Some(nsec) = matches.get_one::<String>("nsec2sec") {
+        let result = process_nsec2sec(nsec).await?;
+        println!("{}", result);
     } else if let Some(secret) = matches.get_one::<String>("sec2pubkey") {
         let result = process_sec2pubkey(secret).await?;
         println!("{}", result);
@@ -67,6 +83,20 @@ async fn main() -> Result<()> {
     }
 
     Ok(())
+}
+
+async fn process_sec2nsec(secret: &str) -> Result<String> {
+    let keys = Keys::from_sk_str(secret).context("Error creating keys from secret")?;
+    let nsec = keys
+        .secret_key()?
+        .to_bech32()
+        .context("Error converting secret key to nsec")?;
+    Ok(nsec)
+}
+
+async fn process_nsec2sec(nsec: &str) -> Result<String> {
+    let secret_key = SecretKey::from_bech32(nsec).context("Error creating keys from nsec")?;
+    Ok(secret_key.display_secret().to_string())
 }
 
 async fn process_sec2npub(secret: &str) -> Result<String> {
@@ -156,6 +186,28 @@ mod tests {
         assert_eq!(
             result,
             "npub1jg44kjf32wtt6cplc7kmyvq3w3jj3pw0yrjq2tk2yp3dpsuh9nps4re52r"
+        );
+    }
+
+    #[tokio::test]
+    async fn test_process_nsec2sec() {
+        let nsec = "nsec19n37hhs08qf74d0hx45rpv7uuhyhcxhhqjshrrecwcf55ghtlxwssugvyp";
+        let result = process_nsec2sec(nsec).await.unwrap();
+
+        assert_eq!(
+            result,
+            "2ce3ebde0f3813eab5f7356830b3dce5c97c1af704a1718f3876134a22ebf99d"
+        );
+    }
+
+    #[tokio::test]
+    async fn test_process_sec2nsec() {
+        let sec = "2ce3ebde0f3813eab5f7356830b3dce5c97c1af704a1718f3876134a22ebf99d";
+        let result = process_sec2nsec(sec).await.unwrap();
+
+        assert_eq!(
+            result,
+            "nsec19n37hhs08qf74d0hx45rpv7uuhyhcxhhqjshrrecwcf55ghtlxwssugvyp"
         );
     }
 }
