@@ -1,4 +1,6 @@
 # nostrkeytool
+[![Coverage Status](https://coveralls.io/repos/github/dcadenas/nostrkeytool/badge.svg?branch=main)](https://coveralls.io/github/dcadenas/nostrkeytool?branch=main)
+
 Tool for NOSTR key operations
 
 ## Installation
