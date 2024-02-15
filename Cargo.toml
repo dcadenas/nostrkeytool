@@ -3,12 +3,22 @@ name = "nostrkeytool"
 readme = "README.md"
 version = "0.2.0"
 authors = ["Daniel Cadenas"]
-edition = "2018"
+edition = "2021"
 description = "A command-line tool for NOSTR key operations"
-license = "MIT"  # Assuming you're using the MIT License
+license = "MIT"
 repository = "https://github.com/dcadenas/nostrkeytool"
 keywords = ["nostr", "key", "crypto"]
 categories = ["cryptography", "command-line-utilities"]
+homepage = "https://github.com/dcadenas/nostrkeytool"
+documentation = "https://github.com/dcadenas/nostrkeytool#readme"
+
+exclude = [
+    ".github/workflows/rust.yml",
+    ".gitignore",
+    "Cargo.lock",
+    "Cargo.toml.orig",
+    "grcov.yml"
+]
 
 [dependencies]
 anyhow = "1.0"
